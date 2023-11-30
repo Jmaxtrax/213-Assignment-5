@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Assignment_5.Models.Music>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Browse Music</h1>
+
+<form id="filterForm">
+    <label for="genre">Select Genre:</label>
+    <select id="genre" name="genre">
+        <option value="">All Genres</option>
+        @foreach (var genre in Model.Select(item => item.Genre).Distinct())
+        {
+            <option value="@genre">@genre</option>
+        }
+    </select>
+    <button type="submit">Search</button>
+    <button id="addToCartBtn" onclick="addToShoppingCart()">Add to Shopping Cart</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Performer
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="musicTableBody">
+        
+        <!-- This tbody will be dynamically populated based on user selection -->
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('filterForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var selectedGenre = document.getElementById('genre').value;
+        fetchMusicItems(selectedGenre);
+    });
+
+    function fetchMusicItems(genre) {
+        // Check if the selected genre is "All Genres"
+        var url = genre === '' ? '/Music/GetAllMusicItems' : '/Music/GetMusicItemsByGenre?genre=' + encodeURIComponent(genre);
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var tableBody = document.getElementById('musicTableBody');
+                tableBody.innerHTML = '';
+
+                data.forEach(item => {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                            <td>${item.title}</td>
+                            <td>${item.genre}</td>
+                            <td>${item.performer}</td>
+                            <td>${item.price}</td>
+                            <td>
+                                <a href="/Music/Edit/${item.id}">Edit</a> |
+                                <a href="/Music/Details/${item.id}">Details</a> |
+                                <a href="/Music/Delete/${item.id}">Delete</a>
+                            </td>
+                        `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+</script>
+
+<script>
+    // Function to handle adding selected songs to the shopping cart
+    function addToShoppingCart() {
+        var selectedSongs = [];
+
+        // Find all checked checkboxes
+        var checkboxes = document.querySelectorAll('.song-checkbox:checked');
+        checkboxes.forEach(function (checkbox) {
+            selectedSongs.push(checkbox.dataset.songId);
+        });
+
+        // Make an AJAX request to add selected songs to the shopping cart
+        // Modify the URL and other details based on your project structure
+        fetch('/ShoppingCart/AddToCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(selectedSongs)
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response, update UI, etc.
+                console.log('Songs added to shopping cart:', data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

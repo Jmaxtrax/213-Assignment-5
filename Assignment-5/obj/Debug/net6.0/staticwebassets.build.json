@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3OhI/+kgaBMP3OuNYyNbc2LGY1FpQHPUp1wD2Sy8Sdc=",
+  "Hash": "hxGP99ep0xCXKfU9W0bE0+Yj0DWOrdjQo6Sb3MUAAwY=",
   "Source": "Assignment-5",
   "BasePath": "_content/Assignment-5",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\joshj\\source\\repos\\213-Assignment-5\\Assignment-5\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Assignment-5.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\joshj\\source\\repos\\213-Assignment-5\\Assignment-5\\wwwroot\\cats.jpg",
+      "SourceId": "Assignment-5",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\joshj\\source\\repos\\213-Assignment-5\\Assignment-5\\wwwroot\\",
+      "BasePath": "_content/Assignment-5",
+      "RelativePath": "cats.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\cats.jpg"
     },
     {
       "Identity": "C:\\Users\\joshj\\source\\repos\\213-Assignment-5\\Assignment-5\\wwwroot\\css\\site.css",

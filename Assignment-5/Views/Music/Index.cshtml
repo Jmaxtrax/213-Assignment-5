@@ -80,12 +80,12 @@
 				data.forEach(item => {
 					var row = document.createElement('tr');
 					row.innerHTML = `
-								<td>${item.title}</td>
-								<td>${item.genre}</td>
-								<td>${item.performer}</td>
-								<td>${item.price}</td>
-								<td><input type="checkbox" class="song-checkbox" data-song-id="${item.id}" /></td>
-							`;
+									<td>${item.title}</td>
+									<td>${item.genre}</td>
+									<td>${item.performer}</td>
+									<td>${item.price}</td>
+									<td><input type="checkbox" class="song-checkbox" data-song-id="${item.id}" /></td>
+								`;
 					tableBody.appendChild(row);
 				});
 			})
@@ -121,4 +121,17 @@
 			})
 			.catch(error => console.error('Error:', error));
 	}
+</script>
+
+<script>
+	// Function to fetch music items on page load
+	(function fetchMusicOnLoad() {
+		// You can provide default values for genre and performer here
+		var defaultGenre = ''; // Set the default genre
+		var defaultPerformer = ''; // Set the default performer
+
+		// Call the fetchMusicItems function with default values
+		fetchMusicItems(defaultGenre, defaultPerformer);
+	})();
+
 </script>
